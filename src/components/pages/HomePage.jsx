@@ -2,55 +2,69 @@ import React, { useEffect, useState } from "react"
 import { io } from "socket.io-client"
 import Cookies from "universal-cookie"
 import { useNavigate } from "react-router-dom"
+import { addDoc, collection, onSnapshot, query, serverTimestamp, where } from "firebase/firestore"
 
 import AddFriend from "../addFriend";
 import Header from "../header";
 import ServerLogo from "../../images/logo/discord.png"
+import PlusIcon from "../../images/icons/plus.png"
 import ServerIcon from "../server";
 import FriendIcon from "../../images/icons/handshake.png"
 import FriendChannel from "../friendChannels";
 import SendIcon from "../../images/icons/send.png"
-import { logout } from "../../utils/Logout";
+
 import ChatBox from "../chatBox";
 
 import ServerSideMessage from "../serverSideMessage";
 import ClientSideMessage from "../clientSideMessage";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../../utils/firebase/config";
+import { auth, db } from "../../utils/firebase/config";
 
 
-const socket = io("http://localhost:8000/")
-let name = null;
-const cookies = new Cookies();
-
-socket.on("connect", () => {
-    console.log(socket.id)
-})
 
 function HomePage() {
     const navigate = useNavigate();
-
     const [value, setValue] = useState("")
     const [serverMessage, setServermessage] = useState("")
     const [isServer, setIsServer] = useState(false)
     const [username, setUsername] = useState("")
-
+    const [uid, setUid] = useState("")
+    const server = []
+    const userRef = collection(db, "user")
+    const serverRef = collection(db, "server")
     onAuthStateChanged(auth, user => {
-        setUsername(user.displayName)
+        // setUsername(user.displayName)
+        setUid(user.uid)
     })
-    socket.on('user-joined', name => {
-        setServermessage(`${name} is joined.`)
-    })
+    const cookies = new Cookies();
+
+    const handleSubmit = async () => {
+        if(!value || value == "") return
+        await addDoc()
+    }
 
     const token = cookies.get("auth-token")
     useEffect(()=> {
         if(!token) return navigate("/auth")
-
+        
     },[token])
 
     useEffect(() => {
+        const queryUser = query(userRef, where("uid", "==", uid))
+        onSnapshot(queryUser, (snapshot) => {
+            snapshot.forEach((doc) => {
+                setUsername(doc.data().username)
+            })
+        })
+        const queryServer = query(serverRef, where("owner", "==", uid))
+        onSnapshot(queryServer, (snapshot) => {
+            snapshot.forEach((doc) => {
+                server.push([doc.data()])
+
+            })
+        })
         setIsServer(true)
-    }, [serverMessage, isServer])
+    }, [serverMessage, isServer, uid])
 
     return (<>
         <AddFriend />
@@ -59,10 +73,14 @@ function HomePage() {
                 <Header />
                 <hr width="40px" color="#738287" />
                 <div className="left-side-server-icons">
-                    <ServerIcon imageSrc={ServerLogo} />
-                    <ServerIcon imageSrc={ServerLogo} />
-                    <ServerIcon imageSrc={ServerLogo} />
-                    <ServerIcon imageSrc={ServerLogo} />
+                    <ServerIcon imageSrc={ServerLogo} href="/" />
+                    {server.forEach((server)=> {
+                        
+                        console.log(server)
+                        
+                    })}
+
+                    <ServerIcon imageSrc={PlusIcon} href="/server/new" />
                 </div>
             </div>
             <div className="main-section">
@@ -97,16 +115,15 @@ function HomePage() {
                                             <a href="#" id="send-message-btn" 
                                             onClick={(event) => {
                                                 event.preventDefault()
-                                                if (!localStorage.getItem("access-name-if")) {
-                                                    logout();
-                                                } else {
+                                                
                                                     const clientMessage = value
                                                     if (clientMessage.length > 0) {
-                                                        socket.emit("send-message", clientMessage)
+                                                        // socket.emit("send-message", clientMessage)
                                                         // append(`Me`, clientMessage, "client")
+                                                        handleSubmit()
                                                         setValue("")
                                                     }
-                                                }
+                                                
                                             }}>
                                                 <img src={SendIcon} width="20px" />
                                             </a>

@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth"
 import Cookies from "universal-cookie"
-
-import { auth, googleProvider } from "../../utils/firebase/config"
+import { addDoc, collection, serverTimestamp } from "firebase/firestore"
+import { auth, googleProvider, db } from "../../utils/firebase/config"
 import "./auth.css"
 
 
@@ -22,6 +22,7 @@ export default function Auth () {
         signInWithPopup(auth, googleProvider).then((response) => {
             console.log(response)
             cookies.set("auth-token", response.user.refreshToken)
+            navigate("/newuser")
         })
     }
 
