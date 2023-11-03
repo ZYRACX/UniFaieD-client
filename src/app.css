@@ -221,7 +221,7 @@
     width: 1135px;
     height: 500px;
     text-align: center;
-    visibility: hidden;
+    visibility: visible;
     z-index: 1;
   }
   

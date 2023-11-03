@@ -17,6 +17,7 @@ function App() {
                 <Route path="/auth" Component={Auth} />
                 <Route path="/newuser" Component={NewUser} />
                 <Route path="/server/new" Component={CraeteServer} />
+                {/* <Route path="/user/:id" Component={} /> */}
             </Routes>
         </Router>
     )

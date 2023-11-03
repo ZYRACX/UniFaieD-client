@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import Cookies from "universal-cookie"
 import { useNavigate } from 'react-router-dom';
-import { addDoc, collection, query, serverTimestamp, where } from "firebase/firestore"
+import { addDoc, collection, serverTimestamp } from "firebase/firestore"
 import { auth, db } from "../../utils/firebase/config";
 import "./createServer.css"
 
@@ -14,7 +14,7 @@ export default function CraeteServer() {
 
     async function createServerHandler() {
         if (!token) return navigate("/auth")
-        if(!serverName || serverName == "") return
+        if(!serverName || serverName === "") return
         try {
     await addDoc(serverRef, {
         name: serverName.current.value,
@@ -34,7 +34,7 @@ export default function CraeteServer() {
 
     useEffect(() => {
         if (!token) return navigate("/auth")
-    }, [token])
+    }, [token, navigate])
     return (<div className="create-server">
         <h1>Craete Your Server</h1>
         <form className="form">
