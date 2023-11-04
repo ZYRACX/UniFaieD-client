@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 import { addDoc, collection, onSnapshot, query, serverTimestamp, where } from "firebase/firestore"
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import AddFriend from "../addFriend";
+import AddFriend from "./addFriend";
 import Header from "../header";
 import ServerLogo from "../../images/logo/discord.png"
 import PlusIcon from "../../images/icons/plus.png"
@@ -20,6 +20,7 @@ import ServerSideMessage from "../serverSideMessage";
 import ClientSideMessage from "../clientSideMessage";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../../utils/firebase/config";
+import { Link } from "react-router-dom"
 
 
 
@@ -33,12 +34,12 @@ function HomePage() {
     const [servers, setServers] = useState([])
     const userRef = collection(db, "user")
     const serverRef = collection(db, "server")
+
     onAuthStateChanged(auth, user => {
         setUsername(user.displayName)
         setUid(user.uid)
     })
     const cookies = new Cookies();
-
     const handleSubmit = async () => {
         if (!value || value == "") return
     }
@@ -64,10 +65,10 @@ function HomePage() {
             setServers(servers)
         })
         // setIsServer(true)
-    }, [serverMessage, isServer, uid])
+    }, [serverMessage, isServer, uid ])
 
     return (<>
-        <AddFriend />
+
         <div className="container">
             <div className="left-side-icons">
                 <Header />
@@ -79,21 +80,25 @@ function HomePage() {
             </div>
             <div className="main-section">
                 <div className="main-divider">
-                        <FriendChannel />
+                    <FriendChannel />
                     <div className="main-friend-chat">
                         <div className="f-header">
                             <img src={FriendIcon} alt="logo" width="30px" />
                             <h3>Friends</h3>
                             <div className="nav-btn">
-                                <a href="#" className="all-friend-btn">All</a>
-                                <a href="#" className="add-friend-btn">Add Friends</a>
-                                <a href="#" >logout</a>
+                                <a href="/" className="all-friend-btn" onClick={(event) => {
+                                    event.preventDefault()
+                                }}>All</a>
+                                <Link to={`/${uid}/friendrequest`} className="add-friend-btn" >Add Friends</Link>
+                                <a href="/" onClick={(event) => {
+                                    
+                                }}>logout</a>
                             </div>
                         </div>
-                        <div class="no-chat-open">
-                                <span>
-                                    <h1>Open a chat</h1>
-                                </span>
+                        <div className="no-chat-open">
+                            <span>
+                                <h1>Open a chat</h1>
+                            </span>
                         </div>
                     </div>
                     <div className="current-work-tab">

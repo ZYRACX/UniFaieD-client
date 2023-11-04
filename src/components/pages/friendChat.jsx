@@ -16,7 +16,7 @@ export default function FriendChat() {
                             <input type="text" placeholder="Enter Text" id="message-input"
                                 onChange={(e) => { setValue(e.target.value) }} value={value}
                             />
-                            <a href="#" id="send-message-btn"
+                            <a href="/" id="send-message-btn"
                                 onClick={(event) => {
                                     event.preventDefault()
                                     const clientMessage = value
