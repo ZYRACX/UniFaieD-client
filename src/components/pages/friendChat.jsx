@@ -1,4 +1,17 @@
+import React, { useEffect, useState } from "react"
+import { onAuthStateChanged } from "firebase/auth";
+
+import SendIcon from "../../images/icons/send.png"
+import { auth, db } from "../../utils/firebase/config";
+import ChatBox from "../chatBox";
 export default function FriendChat() {
+    const [username, setUsername] = useState("")
+    const [uid, setUid] = useState("")
+
+    onAuthStateChanged(auth, user => {
+        setUsername(user.displayName)
+        setUid(user.uid)
+    })
     return (
         <div className="f-chat">
             <div className="chat-open">
@@ -14,17 +27,12 @@ export default function FriendChat() {
                             name={"adad"} />
                         <div className="chat-input">
                             <input type="text" placeholder="Enter Text" id="message-input"
-                                onChange={(e) => { setValue(e.target.value) }} value={value}
                             />
                             <a href="/" id="send-message-btn"
                                 onClick={(event) => {
                                     event.preventDefault()
                                     const clientMessage = value
                                     if (clientMessage.length > 0) {
-                                        // socket.emit("send-message", clientMessage)
-                                        // append(`Me`, clientMessage, "client")
-                                        handleSubmit()
-                                        setValue("")
                                     }
                                 }}>
                                 <img src={SendIcon} width="20px" />

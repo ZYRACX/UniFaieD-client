@@ -20,12 +20,12 @@ export default function RootPage() {
         useEffect(() => {
             if (!token) return navigate("/auth")
     
-        }, [token])
+        }, [token, navigate,uid])
         useEffect(() => {
             if(uid){
                 navigate(`/${uid}`)
             }
-        }, [navigate])
+        }, [navigate, uid])
         
     return (<></>)
 }

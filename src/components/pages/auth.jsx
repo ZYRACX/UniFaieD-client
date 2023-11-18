@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef } from "react"
 import { useNavigate } from "react-router-dom"
-import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth"
+import {  signInWithPopup } from "firebase/auth"
 import Cookies from "universal-cookie"
-import { addDoc, collection, serverTimestamp } from "firebase/firestore"
-import { auth, googleProvider, db } from "../../utils/firebase/config"
+import { auth, googleProvider } from "../../utils/firebase/config"
 import "./auth.css"
 
 

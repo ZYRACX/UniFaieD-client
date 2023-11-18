@@ -32,7 +32,7 @@ export default function NewUser() {
                 navigate('/');
             }
         })
-    }, [currentUserUid, DBref, ])
+    }, [currentUserUid, DBref, navigate])
     return (
         <div className="new-user">
             <input type="text" name="username" ref={username} />
