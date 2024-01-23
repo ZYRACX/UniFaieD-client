@@ -4,10 +4,13 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import "./responsive.css"
+import UserContext from "./context/authContext"
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <UserContext>
     <App />
+    </UserContext>
   </React.StrictMode>
 );
 
