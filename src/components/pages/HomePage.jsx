@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react"
 import { io } from "socket.io-client"
 import Cookies from "universal-cookie"
 import { useNavigate } from "react-router-dom"
-import { addDoc, collection, onSnapshot, query, serverTimestamp, where, and } from "firebase/firestore"
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import AddFriend from "./addFriend";
@@ -14,9 +13,6 @@ import FriendIcon from "../../images/icons/handshake.png"
 import TurboIcon from "../../images/icons/turbo-engine.png"
 
 
-
-import { onAuthStateChanged } from "firebase/auth";
-import { auth, db } from "../../utils/firebase/config";
 import { Link } from "react-router-dom"
 import Room from "../room"
 
@@ -30,50 +26,13 @@ function HomePage() {
     const [uid, setUid] = useState("")
     const [userArray, setUserarray] = useState([])
     const [servers, setServers] = useState([])
-    const userRef = collection(db, "user")
-    const MessageRef = collection(db, "message")
-    const serverRef = collection(db, "server")
-
-    onAuthStateChanged(auth, user => {
-        setUsername(user.displayName)
-        setUid(user.uid)
-    })
     const cookies = new Cookies();
     const handleSubmit = async () => {
         if (!value || value == "") return
-        // await addDoc(MessageRef, {
-
-        // })
     }
 
     const token = cookies.get("auth-token")
-    useEffect(() => {
-        if (!token) return navigate("/auth")
-
-
-        const queryUser = query(userRef, where("uid", "==", uid))
-        onSnapshot(queryUser, (snapshot) => {
-            snapshot.forEach((doc) => {
-            })
-        })
-        const directMessageQuery = query(MessageRef, where("user_uid", "array-contains", uid))
-        onSnapshot(directMessageQuery, snapshot => {
-            let messages = []
-            messages = snapshot.docs.map((doc) => ({ ...doc.data() }))
-            console.log(messages)
-            setUserarray(messages)
-        })
-        let servers
-        const queryServer = query(serverRef, where("owner", "==", uid))
-        onSnapshot(queryServer, (snapshot) => {
-            servers = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-            setServers(servers)
-        })
-        // setIsServer(true)
-    }, [token, serverMessage, isServer, uid, username, navigate])
-
-
-
+    
     return (<>
 
         <div className="container">
@@ -81,7 +40,7 @@ function HomePage() {
                 <Header />
                 <hr width="40px" color="#738287" />
                 <div className="left-side-server-icons">
-                    {servers.map((server, index) => <ServerIcon imageSrc={ServerLogo} key={index} />)}
+                    {/* {servers.map((server, index) => <ServerIcon imageSrc={ServerLogo} key={index} />)} */}
                     <ServerIcon imageSrc={PlusIcon} href="/server/new" />
                 </div>
             </div>
@@ -117,7 +76,7 @@ function HomePage() {
                                         <b>+</b>
                                     </h5>
                                 </div>
-                                {userArray.map((room, index) => {
+                                {/* {userArray.map((room, index) => {
                                     return <Room key={index} imageSrc={ServerLogo} username={room["user_uid"][1]}/>
                                     // return <div className="d-m-list" id="dm-list" key={index}>
                                     //     <div className="user-btn">
@@ -129,7 +88,7 @@ function HomePage() {
                                     //         </div>
                                     //     </div>
                                     // </div>;
-                                })}
+                                })} */}
                                 {/* <div className="d-m-list" id="dm-list">
                     <div className="user-btn">
                         <div className="user-image">
