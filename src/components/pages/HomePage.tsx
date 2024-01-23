@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react"
-import { io } from "socket.io-client"
 import Cookies from "universal-cookie"
 import { useNavigate } from "react-router-dom"
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import AddFriend from "./addFriend";
 import Header from "../header";
@@ -26,19 +24,19 @@ function HomePage() {
     const [uid, setUid] = useState("")
     const [userArray, setUserarray] = useState([])
     const [servers, setServers] = useState([])
-    const cookies = new Cookies();
+    // const cookies = new Cookies();
     const handleSubmit = async () => {
         if (!value || value == "") return
     }
 
-    const token = cookies.get("auth-token")
+    // const token = cookies.get("auth-token")
     
     return (<>
 
         <div className="container">
             <div className="left-side-icons">
                 <Header />
-                <hr width="40px" color="#738287" />
+                <hr width={40} color="#738287" />
                 <div className="left-side-server-icons">
                     {/* {servers.map((server, index) => <ServerIcon imageSrc={ServerLogo} key={index} />)} */}
                     <ServerIcon imageSrc={PlusIcon} href="/server/new" />
@@ -113,7 +111,7 @@ function HomePage() {
                                     event.preventDefault()
                                 }}>All</a>
                                 <Link to={`/${uid}/friendrequest`} className="add-friend-btn" >Add Friends</Link>
-                                <a href="/" onClick={(event) => {
+                                <a href="/" onClick={() => {
 
                                 }}>logout</a>
                             </div>

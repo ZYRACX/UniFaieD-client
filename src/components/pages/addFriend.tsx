@@ -1,13 +1,11 @@
-import React, { useEffect, useRef, useState } from "react"
-import Cookies from "universal-cookie"
-import { useNavigate } from "react-router-dom"
+import { useEffect, useRef, useState } from "react"
+// import Cookies from "universal-cookie"
+import { NavigateFunction, useNavigate } from "react-router-dom"
 export default function AddFriend() {
-    const cookies = new Cookies();
 
-    const [uid, setUid] = useState("")
-    const [users, setUsers] = useState([])
-    let navigate = useNavigate()
-    const UsernameRef = useRef("")
+    const [uid] = useState<string>()
+    const navigate:NavigateFunction = useNavigate()
+    const UsernameRef = useRef<HTMLInputElement>(null)
 
     useEffect(() => {
     }, [uid, navigate])

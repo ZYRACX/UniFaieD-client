@@ -1,17 +1,13 @@
-import React, { useEffect, useState } from "react"
-import { onAuthStateChanged } from "firebase/auth";
+import { useState } from "react"
 
 import SendIcon from "../../images/icons/send.png"
-import { auth, db } from "../../utils/firebase/config";
+import ServerLogo from "../../images/logo/discord.png";
 import ChatBox from "../chatBox";
 export default function FriendChat() {
-    const [username, setUsername] = useState("")
-    const [uid, setUid] = useState("")
+    const [username, setUsername] = useState<string>("")
+    const [uid, setUid] = useState<string>()
 
-    onAuthStateChanged(auth, user => {
-        setUsername(user.displayName)
-        setUid(user.uid)
-    })
+
     return (
         <div className="f-chat">
             <div className="chat-open">
@@ -22,18 +18,18 @@ export default function FriendChat() {
                             <h3>{username}</h3>
                         </div>
                         <hr />
-                        <ChatBox Component={isServer ? ServerSideMessage : ClientSideMessage}
+                        {/* <ChatBox Component={isServer ? ServerSideMessage : ClientSideMessage}
                             messageContent={serverMessage}
-                            name={"adad"} />
+                            name={"adad"} /> */}
                         <div className="chat-input">
                             <input type="text" placeholder="Enter Text" id="message-input"
                             />
                             <a href="/" id="send-message-btn"
                                 onClick={(event) => {
                                     event.preventDefault()
-                                    const clientMessage = value
-                                    if (clientMessage.length > 0) {
-                                    }
+                                    // const clientMessage = value
+                                    // if (clientMessage.length > 0) {
+                                    // }
                                 }}>
                                 <img src={SendIcon} width="20px" />
                             </a>

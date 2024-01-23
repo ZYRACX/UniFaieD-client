@@ -1,76 +1,76 @@
 :root {
-    --primary-color: #31383b;
-    --secondary-color: #475159;
-    --third-color: #00c5a8;
-    /* Dark colors */
-    --green: #008000;
-    --dark-gray: #32525e;
-    /* Light colors */
-    --cyan: #4ab6a6;
-    --cyan-2: #00c5a8;
-    --light-geen: #3bb27a;
-    --light-red: #b23b3b;
-    --light-gray: #808080;
-  
-    /* colors with class name */
-    --friend-request-bg-color: #647b84;
-    --btn-color: var(--cyan);
-  }
-  
-  * {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  
-  body,
-  html {
-    scroll-behavior: smooth;
-    max-width: 100%;
-    overflow-x: hidden;
-    background-color: var(--primary-color);
-    /* background-image: radial-gradient(
-      circle,
-      #00bdff,
-      #00c6ff,
-      #00cfff,
-      #00d7ff,
-      #00dfff,
-      #00e5fc,
-      #00ebf8,
-      #00f1f3,
-      #00f6e4,
-      #00fbcf,
-      #00fdb2,
-      #00ff90
-    ); */
-  }
-  /* hr {
-  } */
-  
-  a {
-    text-decoration: none;
-    color: white;
-  }
-  
-  .container {
-    padding-left: 10px;
-    /* height: 90vh; */
-  }
-  
-  .left-side-icons {
-    box-sizing: border-box;
-    float: left;
-    width: 60px;
-    overflow: hidden;
-  }
-  
-  .server-icon {
-    padding-top: 5px;
-  }
-  
-  .main-divider {
-    /* border: 1px solid thistle; */
-    /* overflow: hidden; */
-    display: flex;
-  }
+  --primary-color: #31383b;
+  --secondary-color: #475159;
+  --third-color: #00c5a8;
+  /* Dark colors */
+  --green: #008000;
+  --dark-gray: #32525e;
+  /* Light colors */
+  --cyan: #4ab6a6;
+  --cyan-2: #00c5a8;
+  --light-geen: #3bb27a;
+  --light-red: #b23b3b;
+  --light-gray: #808080;
+
+  /* colors with class name */
+  --friend-request-bg-color: #647b84;
+  --btn-color: var(--cyan);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body,
+html {
+  scroll-behavior: smooth;
+  max-width: 100%;
+  overflow-x: hidden;
+  background-color: var(--primary-color);
+  /* background-image: radial-gradient(
+    circle,
+    #00bdff,
+    #00c6ff,
+    #00cfff,
+    #00d7ff,
+    #00dfff,
+    #00e5fc,
+    #00ebf8,
+    #00f1f3,
+    #00f6e4,
+    #00fbcf,
+    #00fdb2,
+    #00ff90
+  ); */
+}
+/* hr {
+} */
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.container {
+  padding-left: 10px;
+  /* height: 90vh; */
+}
+
+.left-side-icons {
+  box-sizing: border-box;
+  float: left;
+  width: 60px;
+  overflow: hidden;
+}
+
+.server-icon {
+  padding-top: 5px;
+}
+
+.main-divider {
+  /* border: 1px solid thistle; */
+  /* overflow: hidden; */
+  display: flex;
+}
